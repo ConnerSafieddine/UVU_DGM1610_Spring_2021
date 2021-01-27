@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 131
+  controlID: 78
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -238,8 +238,8 @@ MonoBehaviour:
     y: 0
     width: 336
     height: 947
-  m_MinSize: {x: 277, y: 74}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -384,7 +384,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: e6090000
     m_LastClickedID: 2534
-    m_ExpandedIDs: 00000000ea0900007e0a0000c80a0000
+    m_ExpandedIDs: 00000000ec090000800a0000ca0a0000ae0b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -412,7 +412,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000ea0900007e0a0000c80a0000ac0b0000
+    m_ExpandedIDs: ffffffff00000000ec090000800a0000ca0a0000ae0b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: FollowPlayer
@@ -608,9 +608,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.168514, y: -0.16911513, z: 0.02936092, w: 0.9706395}
+    m_Target: {x: 0.28285328, y: -0.19955108, z: 0.060288157, w: 0.9362365}
     speed: 2
-    m_Value: {x: 0.168514, y: -0.16911513, z: 0.02936092, w: 0.9706395}
+    m_Value: {x: 0.28285328, y: -0.19955108, z: 0.060288157, w: 0.9362365}
   m_Size:
     m_Target: 11.115038
     speed: 2
@@ -654,10 +654,10 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 48}
       m_SelectedIDs: a20d0000
       m_LastClickedID: 3490
-      m_ExpandedIDs: defbffff3e0e0000
+      m_ExpandedIDs: defbffff3e0e0000800e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
