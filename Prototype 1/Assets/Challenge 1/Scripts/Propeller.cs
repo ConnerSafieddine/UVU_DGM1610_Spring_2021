@@ -14,6 +14,7 @@ public class Propeller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Propeller spins at 1000
         transform.Rotate(Vector3.forward * speed * Time.deltaTime);
     }
 }
