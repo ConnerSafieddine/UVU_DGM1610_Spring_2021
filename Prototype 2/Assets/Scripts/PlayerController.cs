@@ -6,7 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     private float horizontalInput;
     private float speed = 10.0f;
-    private float xRange = 10.0f;
+    private float xRange = 24.0f;
+
+    public GameObject projectilePrefab;
+    public float fireInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,12 @@ public class PlayerController : MonoBehaviour
         // Getting player input A & D
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        
+        // Getting input "space bar" shooting pizza as projectile
+        if(Input.GetKeyDown(KeyCode.Space))   
+        {
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        }
 
     }
 }
