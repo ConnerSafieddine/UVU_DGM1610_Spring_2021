@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float horizontalInput;
-    private float speed = 10.0f;
+    private float speed = 20.0f;
     private float xRange = 24.0f;
+    private float projectileOffset = 1.0f;
 
     public GameObject projectilePrefab;
     public float fireInput;
@@ -33,10 +34,10 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
         
-        // Getting input "space bar" shooting pizza as projectile
-        if(Input.GetKeyDown(KeyCode.Space))   
+        // Getting input "space bar" shooting pizza as projectile from player position and offset the height by 1 meter
+        if (Input.GetKeyDown(KeyCode.Space))   
         {
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+            Instantiate(projectilePrefab, new Vector3(transform.position.x, transform.position.y + projectileOffset, transform.position.z), projectilePrefab.transform.rotation);
         }
 
     }
