@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 6394948698273454948}
   m_Layer: 0
   m_Name: Obstical
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,8 +122,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.37845802, y: 1.9237571, z: 1}
-  m_Center: {x: -0.059872627, y: 0.95187855, z: 0}
+  m_Size: {x: 0.37845802, y: 1.9237571, z: 3.1957254}
+  m_Center: {x: -0.059872627, y: 0.95187855, z: 0.0069925785}
 --- !u!54 &8135087020881504258
 Rigidbody:
   m_ObjectHideFlags: 0
