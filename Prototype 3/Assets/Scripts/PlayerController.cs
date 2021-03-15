@@ -30,9 +30,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
         {
+            // Player jumps when space bar is pressed
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAnim.SetTrigger("Jump_trig");
+            // Dirt particle stops when player jumps
             dirtParticle.Stop();
             playerAudio.PlayOneShot(jumpSound, 0.7f);
         }
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            // When player is back on ground play dirt particle
             isOnGround = true;
             dirtParticle.Play();
         }
@@ -49,10 +52,12 @@ public class PlayerController : MonoBehaviour
 
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
+            // Game ends when player collides with obstacle
             Debug.Log("Game Over");
             gameOver = true;
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
+            // Dirt particle stops playing and explosion starts playing when player collides with obstacle
             explosionParticle.Play();
             dirtParticle.Stop();
             playerAudio.PlayOneShot(crashSound, 0.7f);
