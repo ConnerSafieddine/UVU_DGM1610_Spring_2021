@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private float speed = 10.0f;
     private float xBound = 15.0f;
     private Rigidbody playerRb;
+    public GameObject bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         MovePlayer();
         ConstrainPlayerPosition();
+        IsShooting();
     }
 
     // Moves the player horizontally
@@ -39,6 +41,16 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector3(-xBound, transform.position.y, transform.position.z);
         }
+    }
+
+    private void IsShooting()
+    {
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(bullet, transform.position, transform.rotation);
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
