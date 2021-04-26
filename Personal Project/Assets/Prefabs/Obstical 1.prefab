@@ -121,3 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9673f399faa4044eb49a45ca86de6f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyBullet: {fileID: 1571929372985757171, guid: ed4665265d856de4a9e1c8a33b7f805a,
+    type: 3}

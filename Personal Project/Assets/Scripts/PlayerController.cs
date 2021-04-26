@@ -1,25 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 10.0f;
-    private float xBound = 15.0f;
+    private float speed = 12.0f;
+    private float xBound = 9.0f;
     private Rigidbody playerRb;
     public GameObject bullet;
+    public SpawnManager spawnManager;
+    public Button startButton;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        spawnManager.isGameActive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
-        ConstrainPlayerPosition();
-        IsShooting();
+        if (spawnManager.isGameActive == true && 
+        {
+            MovePlayer();
+            ConstrainPlayerPosition();
+            IsShooting();
+        }
+       
     }
 
     // Moves the player horizontally
@@ -63,14 +72,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Powerup"))
-        {
-            Destroy(other.gameObject);
-        }
 
         if(other.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
+            spawnManager.isGameActive = false;
+            spawnManager.gameOverText.gameObject.SetActive(true);
+            spawnManager.restartButton.gameObject.SetActive(true);
         }
     }
 }
