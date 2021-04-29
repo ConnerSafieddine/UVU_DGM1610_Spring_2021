@@ -6,12 +6,15 @@ public class Bullet : MonoBehaviour
 {
     private float speed = 10;
     private float zDestroy = 12;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    private SpawnManager spawnManager;
+
+    private int pointValue = 10;
+
+    public void Start()
+    {
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -29,6 +32,7 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(other.gameObject);
+            spawnManager.UpdateScore(pointValue);
         }
     }
 }
