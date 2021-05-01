@@ -17,8 +17,7 @@ public class MoveDown : MonoBehaviour
     public AudioClip enemyZap;
     public AudioClip boom;
     
-    // Start is called before the first frame update. Get objectRb rigidbody. Repeat spawning the enemy bullet with a random spawn time
-    void Start()
+    void Start() // When the starts spawn the EnemyBullet every 1.6 seconds. Find the SpawnManager componenet for the spawnManager variable and find the enemyAudio and get the AudioSource component.
     {
         objectRb = GetComponent<Rigidbody>();
 
@@ -27,13 +26,12 @@ public class MoveDown : MonoBehaviour
         enemyAudio = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         objectRb.AddForce(Vector3.back * speed * Time.deltaTime); /* Add a backward force to the rigidbody. If the object is -4 zposition then destroy the object. 
         Make the game over and show the Game Over text as well as the restart button. */
 
-        if (transform.position.z < zDestroy)
+        if (transform.position.z < zDestroy) // If the Obstical gets to -4 on the z axis then destroy the object, make the game inactive, show the "Game Over" text, and show the "Restart" button text.
         {
             Destroy(gameObject);
             spawnManager.isGameActive = false;
@@ -42,7 +40,7 @@ public class MoveDown : MonoBehaviour
         }
     }
 
-    void SpawnEnemyBullet() // Spawn the bullet with current position and rotation.
+    void SpawnEnemyBullet() // Spawn the bullet with current position and rotation. Add the enemy audio "enemyZap".
     {
         Instantiate(enemyBullet, transform.position, transform.rotation);
         enemyAudio.PlayOneShot(enemyZap, 0.1f);

@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     public AudioClip boom;
     
 
-    public void Start()
+    public void Start() // On Start find the SpawnManager, MeshRenderer, BoxCollider and bulletAudio and find their componenets respectively.
     {
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         meshRenderer = GetComponent<MeshRenderer>();
@@ -24,12 +24,12 @@ public class Bullet : MonoBehaviour
         bulletAudio = GetComponent<AudioSource>();
         
     }
-    // Update is called once per frame
-    void Update()
+
+    void Update() // On Update add a forward speed to the bullet in seconds.
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        if (transform.position.z > zDestroy)
+        if (transform.position.z > zDestroy) // If the object gets to 20 on the z axis then destroy the game object.
         {
             Destroy(gameObject);
         }
@@ -37,7 +37,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy")) /* If the bullet hits a trigger tagged "Enemy" then add bullet audio "boom", 
+            disable the meshRenderer, disable the boxCollider, destroy the game object tagged "Enemy" and update the score by it's point value." */
+
         {
             bulletAudio.PlayOneShot(boom, 0.5f);
             meshRenderer.enabled = false;

@@ -22,8 +22,9 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody playerRb;
     public GameObject bullet;
-    // Start is called before the first frame update
-    void Start()
+
+    void Start() /* Get the Rigidbody component for playerRb, get the SpawnManager component for spawnManager, get the MeshRenderer component for meshRender, 
+        get the MeshCollider component for meshCollider, get the AudioSource component for playerAudio. */
     {
         playerRb = GetComponent<Rigidbody>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -32,8 +33,7 @@ public class PlayerController : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() // If the game is active allow the MovePlayer, ConstrainPlayerPosition, and IsShooting methods to run.
     {
         if (spawnManager.isGameActive)
         {
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Moves the player horizontally
+    // Moves the player horizontally using global coordinates.
     void MovePlayer()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void IsShooting()
+    private void IsShooting() // If the player presses the space bar spawn a bullet and play the playerAudio zap sound.
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -73,14 +73,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) /* If the player touches object tagged "Enemy" collider then play boom audio, disable the meshRender, disable the meshCollider. 
+        Make the game inactive, show the "Game Over" text, show the "Restart" button text. */
     {
-
         if(other.gameObject.CompareTag("Enemy"))
         {
             playerAudio.PlayOneShot(boom, 0.5f);
             meshRenderer.enabled = false;
             meshCollider.enabled = false;
+
             spawnManager.isGameActive = false;
             spawnManager.gameOverText.gameObject.SetActive(true);
             spawnManager.restartButton.gameObject.SetActive(true);

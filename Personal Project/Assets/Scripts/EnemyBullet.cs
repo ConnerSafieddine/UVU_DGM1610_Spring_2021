@@ -14,31 +14,32 @@ public class EnemyBullet : MonoBehaviour
     
     public AudioClip boom;
     public AudioClip bulletBoom;
-    // Start is called before the first frame update
-    void Start()
+
+    void Start() /* Find SpawnManager component for spawnManager, find the MeshRenderer componenet for meshRenderer, 
+        find the BoxCollider component for boxCollider, and find the AudioSource componenet for enemyBulletAudio. */
     {
-        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>(); // Finding the SpawnManager game object and getting the script component.
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         meshRenderer = GetComponent<MeshRenderer>();
         boxCollider = GetComponent<BoxCollider>();
         enemyBulletAudio = GetComponent<AudioSource>();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void Update() // Move the Enemy bullet down the screen 15 meters per second. If the bullet reaches -4 or less it will destroy the game object.
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime); // Enemy bullet will move down the screen. 
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);  
 
-        if (transform.position.z < zDestroy) // If the bullet reaches -4 or less it will destroy the game object.
+        if (transform.position.z < zDestroy)
         {
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter(Collider other) // If the game object is not the Enemy than destroy the game object and the other object. Also make the game over and activate "Game Over" text along with the restart button.
+    private void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")) /* If the EnemyBullet touches the Collider for tagged "Player" then destroy the game object,
+        disable the meshRenderer, disable the boxCollider, and play the enemyBulletAudio "boom". Make the game inactive, show the "Game Over" text and show the "Restart" button text. */
         {
-            Destroy(other.gameObject);
+            Destroy(other.gameObject); 
             meshRenderer.enabled = false;
             boxCollider.enabled = false;
             enemyBulletAudio.PlayOneShot(boom, 0.5f);
@@ -48,7 +49,8 @@ public class EnemyBullet : MonoBehaviour
             spawnManager.restartButton.gameObject.SetActive(true);
         }
 
-        if (other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet")) /* If the EnemyBullet touches the Bullet collider then play the enemyBulletAudio "bulletBoom", 
+            Destroy the Bullet object, disable the meshRenderer, disable the boxCollider and make the game active. */
         {
             enemyBulletAudio.PlayOneShot(bulletBoom, 0.2f);
             Destroy(other.gameObject);

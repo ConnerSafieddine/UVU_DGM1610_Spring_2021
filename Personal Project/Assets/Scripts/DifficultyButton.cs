@@ -9,15 +9,15 @@ public class DifficultyButton : MonoBehaviour
     public Button button;
     public int difficulty;
     public bool levelStart = false;
-    // Start is called before the first frame update
-    void Start()
+
+    void Start() // Find SpawnManager component for spawnManager. Find the Button componenet for button. When the button is clicked play the SetDifficulty method. 
     {
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         button = GetComponent<Button>();
         button.onClick.AddListener(SetDifficulty);
     }
 
-    private void Update()
+    private void Update() // If the game is active show the "Title Text".
     {
         if (spawnManager.isGameActive == true)
         {
@@ -25,8 +25,7 @@ public class DifficultyButton : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    public void SetDifficulty()
+    public void SetDifficulty() // If the game is not active then ask the player for difficulty.
     {
         if (spawnManager.isGameActive == false)
         {
