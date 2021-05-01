@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    private float speed = 10;
-    private float zDestroy = -4;
+    private float speed = 15;
+    private float zDestroy = -10;
 
     private SpawnManager spawnManager;
+    private MeshRenderer meshRenderer;
+    private BoxCollider boxCollider;
+    private AudioSource enemyBulletAudio;
+    
+    public AudioClip boom;
+    public AudioClip bulletBoom;
     // Start is called before the first frame update
     void Start()
     {
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>(); // Finding the SpawnManager game object and getting the script component.
+        meshRenderer = GetComponent<MeshRenderer>();
+        boxCollider = GetComponent<BoxCollider>();
+        enemyBulletAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,8 +38,11 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
             Destroy(other.gameObject);
+            meshRenderer.enabled = false;
+            boxCollider.enabled = false;
+            enemyBulletAudio.PlayOneShot(boom, 0.5f);
+
             spawnManager.isGameActive = false;
             spawnManager.gameOverText.SetActive(true);
             spawnManager.restartButton.gameObject.SetActive(true);
@@ -38,8 +50,10 @@ public class EnemyBullet : MonoBehaviour
 
         if (other.gameObject.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            enemyBulletAudio.PlayOneShot(bulletBoom, 0.2f);
             Destroy(other.gameObject);
+            meshRenderer.enabled = false;
+            boxCollider.enabled = false;
             spawnManager.isGameActive = true;
         }
     }

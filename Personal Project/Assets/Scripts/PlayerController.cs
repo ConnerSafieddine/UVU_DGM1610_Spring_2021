@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,16 +8,28 @@ public class PlayerController : MonoBehaviour
 {
     private float speed = 16.0f;
     private float xBound = 9.0f;
-    private float rotationLimit = 20.0f;
     private float rotationSpeed = 50.0f;
+    private float rotationLock;
+
+    private AudioSource playerAudio;
+    public AudioClip zap;
+    public AudioClip boom;
+    public AudioClip music;
+
+    private SpawnManager spawnManager;
+    private MeshRenderer meshRenderer;
+    private MeshCollider meshCollider;
+
     private Rigidbody playerRb;
     public GameObject bullet;
-    public SpawnManager spawnManager;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshCollider = GetComponent<MeshCollider>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,7 +40,6 @@ public class PlayerController : MonoBehaviour
             MovePlayer();
             ConstrainPlayerPosition();
             IsShooting();
-            PivotInput();
         }
     }
 
@@ -57,6 +69,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(bullet, transform.position, transform.rotation);
+            playerAudio.PlayOneShot(zap, 0.1f);
         }
     }
 
@@ -65,28 +78,12 @@ public class PlayerController : MonoBehaviour
 
         if(other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            playerAudio.PlayOneShot(boom, 0.5f);
+            meshRenderer.enabled = false;
+            meshCollider.enabled = false;
             spawnManager.isGameActive = false;
             spawnManager.gameOverText.gameObject.SetActive(true);
             spawnManager.restartButton.gameObject.SetActive(true);
-        }
-    }
-
-    private void PivotInput()
-    {
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
-        }
-
-        if (transform.rotation.z > 20)
-        {
-            transform.Rotate(0,0,20); // *We need to lock the z position somehow.*
         }
     }
 }

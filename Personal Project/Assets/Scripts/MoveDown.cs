@@ -7,21 +7,24 @@ public class MoveDown : MonoBehaviour
     private float zDestroy = -4.0f;
     private float speed = 300.0f;
     private float bulletSpawnDelay = 0.0f;
-    private float bulletSpawnTime;
+    private float bulletSpawnTime = 1.6f;
 
     private Rigidbody objectRb;
+    private AudioSource enemyAudio;
     private SpawnManager spawnManager;
 
     public GameObject enemyBullet;
+    public AudioClip enemyZap;
+    public AudioClip boom;
     
     // Start is called before the first frame update. Get objectRb rigidbody. Repeat spawning the enemy bullet with a random spawn time
     void Start()
     {
         objectRb = GetComponent<Rigidbody>();
-        bulletSpawnTime = Random.Range(1, 50);
 
         InvokeRepeating("SpawnEnemyBullet", bulletSpawnDelay, bulletSpawnTime);
-        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>(); // find the SpawnManager game object and get the SpawnManager script component.
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        enemyAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,5 +45,6 @@ public class MoveDown : MonoBehaviour
     void SpawnEnemyBullet() // Spawn the bullet with current position and rotation.
     {
         Instantiate(enemyBullet, transform.position, transform.rotation);
+        enemyAudio.PlayOneShot(enemyZap, 0.1f);
     }
 }
