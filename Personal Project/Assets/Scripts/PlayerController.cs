@@ -11,16 +11,16 @@ public class PlayerController : MonoBehaviour
     private float rotationSpeed = 50.0f;
     private float rotationLock;
 
-    private AudioSource playerAudio;
     public AudioClip zap;
     public AudioClip boom;
+    public GameObject bullet;
+    public ParticleSystem explosionParticle;
 
+    private AudioSource playerAudio;
     private SpawnManager spawnManager;
     private MeshRenderer meshRenderer;
     private MeshCollider meshCollider;
-
     private Rigidbody playerRb;
-    public GameObject bullet;
 
     void Start() /* Get the Rigidbody component for playerRb, get the SpawnManager component for spawnManager, get the MeshRenderer component for meshRender, 
         get the MeshCollider component for meshCollider, get the AudioSource component for playerAudio. */
@@ -78,8 +78,10 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy"))
         {
             playerAudio.PlayOneShot(boom, 0.5f);
+            explosionParticle.Play();
             meshRenderer.enabled = false;
             meshCollider.enabled = false;
+            Destroy(other.gameObject);
 
             spawnManager.isGameActive = false;
             spawnManager.gameOverText.gameObject.SetActive(true);

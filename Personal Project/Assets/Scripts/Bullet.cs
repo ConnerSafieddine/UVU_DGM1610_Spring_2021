@@ -13,7 +13,9 @@ public class Bullet : MonoBehaviour
     private MeshRenderer meshRenderer;
     private BoxCollider boxCollider;
     private AudioSource bulletAudio;
+
     public AudioClip boom;
+    public ParticleSystem enemyExplosionParticle;
     
 
     public void Start() // On Start find the SpawnManager, MeshRenderer, BoxCollider and bulletAudio and find their componenets respectively.
@@ -42,6 +44,7 @@ public class Bullet : MonoBehaviour
 
         {
             bulletAudio.PlayOneShot(boom, 0.5f);
+            enemyExplosionParticle.Play();
             meshRenderer.enabled = false;
             boxCollider.enabled = false;
             Destroy(other.gameObject);

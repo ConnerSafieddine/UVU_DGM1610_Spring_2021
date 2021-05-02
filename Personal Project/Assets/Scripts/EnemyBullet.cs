@@ -14,6 +14,8 @@ public class EnemyBullet : MonoBehaviour
     
     public AudioClip boom;
     public AudioClip bulletBoom;
+    public ParticleSystem bulletExplosionParticle;
+    public ParticleSystem explosionParticle;
 
     void Start() /* Find SpawnManager component for spawnManager, find the MeshRenderer componenet for meshRenderer, 
         find the BoxCollider component for boxCollider, and find the AudioSource componenet for enemyBulletAudio. */
@@ -39,7 +41,8 @@ public class EnemyBullet : MonoBehaviour
         if (other.gameObject.CompareTag("Player")) /* If the EnemyBullet touches the Collider for tagged "Player" then destroy the game object,
         disable the meshRenderer, disable the boxCollider, and play the enemyBulletAudio "boom". Make the game inactive, show the "Game Over" text and show the "Restart" button text. */
         {
-            Destroy(other.gameObject); 
+            Destroy(other.gameObject);
+            explosionParticle.Play();
             meshRenderer.enabled = false;
             boxCollider.enabled = false;
             enemyBulletAudio.PlayOneShot(boom, 0.5f);
@@ -53,6 +56,7 @@ public class EnemyBullet : MonoBehaviour
             Destroy the Bullet object, disable the meshRenderer, disable the boxCollider and make the game active. */
         {
             enemyBulletAudio.PlayOneShot(bulletBoom, 0.2f);
+            bulletExplosionParticle.Play();
             Destroy(other.gameObject);
             meshRenderer.enabled = false;
             boxCollider.enabled = false;
