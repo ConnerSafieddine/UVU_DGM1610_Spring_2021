@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 16.0f;
+    private const float speed = 16.0f;
     private float xBound = 9.0f;
     private float rotationSpeed = 50.0f;
     private float rotationLock;
@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     private AudioSource playerAudio;
     public AudioClip zap;
     public AudioClip boom;
-    public AudioClip music;
 
     private SpawnManager spawnManager;
     private MeshRenderer meshRenderer;

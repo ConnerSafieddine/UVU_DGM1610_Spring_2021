@@ -26,7 +26,7 @@ public class MoveDown : MonoBehaviour
         enemyAudio = GetComponent<AudioSource>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         objectRb.AddForce(Vector3.back * speed * Time.deltaTime); /* Add a backward force to the rigidbody. If the object is -4 zposition then destroy the object. 
         Make the game over and show the Game Over text as well as the restart button. */

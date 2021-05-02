@@ -17,7 +17,7 @@ public class DifficultyButton : MonoBehaviour
         button.onClick.AddListener(SetDifficulty);
     }
 
-    private void Update() // If the game is active show the "Title Text".
+    private void FixedUpdate() // If the game is active show the "Title Text".
     {
         if (spawnManager.isGameActive == true)
         {

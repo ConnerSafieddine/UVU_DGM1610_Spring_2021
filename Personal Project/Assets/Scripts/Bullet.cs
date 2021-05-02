@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         
     }
 
-    void Update() // On Update add a forward speed to the bullet in seconds.
+    void FixedUpdate() // On Update add a forward speed to the bullet in seconds.
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 

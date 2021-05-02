@@ -8,7 +8,7 @@ public class MoveBackgroundL3 : MonoBehaviour
     private float speed = 0.5f;
     private float worldOrigin = 0.0f;
 
-    void Update() // Move the Layer 3 background down 0.5 meters per second. If the position is less than -40.94 then reset it's position.
+    void FixedUpdate() // Move the Layer 3 background down 0.5 meters per second. If the position is less than -40.94 then reset it's position.
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
         if (transform.position.z < zBound)

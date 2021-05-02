@@ -24,7 +24,7 @@ public class EnemyBullet : MonoBehaviour
         enemyBulletAudio = GetComponent<AudioSource>();
     }
     
-    void Update() // Move the Enemy bullet down the screen 15 meters per second. If the bullet reaches -4 or less it will destroy the game object.
+    void FixedUpdate() // Move the Enemy bullet down the screen 15 meters per second. If the bullet reaches -4 or less it will destroy the game object.
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);  
 
